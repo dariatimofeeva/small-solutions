@@ -1,0 +1,21 @@
+import UIKit
+// удалить повторяющиеся элементы из отсортированного массива и вернуть количество элементов
+//todo: проверка на пустой массив
+func removeDuplicates(input: inout [Int]) -> Int {
+    guard input.isEmpty == false else { return 0 }
+    var lastCheckedEl: Int?
+    var index: Int = 0
+    while index  < input.count {
+        if input [index] == lastCheckedEl {
+            input.remove(at: index)
+        }
+        else {
+            lastCheckedEl  = input[index]
+            index += 1
+        }
+    }
+    return input.count
+}
+var arr = [0, 0, 1, 1, 1, 2, 3, 3, 4, 4, 4, 5]
+var arr2:[Int] = []
+print(removeDuplicates(input: &arr2))
