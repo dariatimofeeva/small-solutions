@@ -1,0 +1,55 @@
+import UIKit
+
+"""
+На вход подается массив. Нужно найти подмассив, удовлетворяющий условию:
+    если отсортировать этот подмассив в порядке возрастания, то весь массив будет отсортирован в порядке возрастания
+и вывести длину этого подмассива.
+"""
+
+let arr: [Int] = [1, 4, 2, 7, 3, 2, 6] // 1, 6 -> 6
+let arr2: [Int] = [1, 2, 3, 2, 6, 4, 7, 8] // 2, 5 -> 4
+let arr3: [Int] = [] // 0
+let arr4: [Int] = [1, 2, 2, 3, 4, 5] // 0
+let arr5: [Int] = [5, 4, 3, 2, 1]
+
+
+func findSubArrToSortArr(array: [Int]) -> Int {
+    
+    if array.count < 2 {
+        return 0
+    }
+    
+    var startOfSubArr: Int = 0
+    var endOfSubArr: Int = 0
+    var maxInArr: Int = array[0]
+    var minInArr: Int = array[array.count - 1]
+    
+    for index in (0...(array.count - 2)).reversed() {
+        if array[index + 1] < array[index] || array[index] > minInArr {
+            startOfSubArr = index
+        }
+        if array[index] < minInArr {
+            minInArr = array[index]
+        }
+    }
+    
+    for index in 1...(array.count - 1)  {
+        if array[index] < array[index - 1] || array[index] < maxInArr {
+            endOfSubArr = index
+        }
+        if array[index] > maxInArr {
+            maxInArr = array[index]
+        }
+    }
+    //print(startOfSubArr)
+    //print(endOfSubArr)
+    
+    if endOfSubArr == startOfSubArr {
+        return 0
+    }
+    return endOfSubArr - startOfSubArr + 1
+}
+
+//print(findSubArrToSortArr(array: arr4))
+//print(" ")
+//print(findSubArrToSortArr(array: arr2))
